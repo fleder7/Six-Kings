@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './StatisticsTable.css';
 
-const StatisticsTable = ({ statsData }) => {
+const StatisticsTable = ({ statsAll = [], statsEinzel = [], statsDoppel = [] }) => {
+  const [mode, setMode] = useState('gesamt');
+
+  const statsData = mode === 'einzel' ? statsEinzel : mode === 'doppel' ? statsDoppel : statsAll;
+
   if (!statsData || statsData.length === 0) {
     return <div className="loading-state">Lade Spielerstatistiken...</div>;
   }
 
   return (
     <div className="table-container">
-      <h2 className="table-title">Spielerstatistiken</h2>
+      <div className="table-header">
+        <h2 className="table-title">Spielerstatistiken</h2>
+        <div className="table-controls">
+          <label htmlFor="stats-mode" style={{ marginRight: '8px' }}>Ansicht:</label>
+          <select id="stats-mode" value={mode} onChange={(e) => setMode(e.target.value)}>
+            <option value="gesamt">Statistik gesamt</option>
+            <option value="einzel">Statistik Einzel</option>
+            <option value="doppel">Statistik Doppel</option>
+          </select>
+        </div>
+      </div>
       <table className="stats-table">
         <thead>
           <tr>

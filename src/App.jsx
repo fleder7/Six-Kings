@@ -44,6 +44,8 @@ function App() {
   const [data, setData] = useState({
     liga: [],
     players: [],
+    playersEinzel: [],
+    playersDoppel: [],
     matchdays: [],
     team: [],
     loading: true,
@@ -69,11 +71,17 @@ function App() {
       const matchdays = processMatchdays(flattenedMatchdays, starterData);
       console.log('Processed matchdays:', matchdays);
       const playerStats = calculatePlayerStats(flattenedMatchdays, playersData, starterData);
+      const singlesRows = (flattenedMatchdays || []).filter(r => String((r && r['Typ']) || '').toLowerCase().includes('einzel'));
+      const doublesRows = (flattenedMatchdays || []).filter(r => String((r && r['Typ']) || '').toLowerCase().includes('doppel'));
+      const playerStatsEinzel = calculatePlayerStats(singlesRows, playersData, starterData);
+      const playerStatsDoppel = calculatePlayerStats(doublesRows, playersData, starterData);
       const ligaTable = processLigaTable(ligaData);
 
       setData({
         liga: ligaTable,
         players: playerStats,
+        playersEinzel: playerStatsEinzel,
+        playersDoppel: playerStatsDoppel,
         matchdays: matchdays,
         team: teamData || [],
         loading: false,
@@ -100,7 +108,7 @@ function App() {
       return <LigaTabelle ligaData={data.liga} />;
     }
     if (activeView === 'statistics') {
-      return <StatisticsTable statsData={data.players} />;
+      return <StatisticsTable statsAll={data.players} statsEinzel={data.playersEinzel} statsDoppel={data.playersDoppel} />;
     }
     if (activeView === 'matchdays') {
       return <MatchdayView matchdays={data.matchdays} />;
