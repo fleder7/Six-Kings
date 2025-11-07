@@ -12,58 +12,75 @@
 .stats-table {
     width: auto;
     min-width: 900px;
-    border-collapse: collapse;
-    background-color: #222;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background-color: transparent;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .stats-table th, .stats-table td {
-    border: 1px solid #444;
-    padding: 8px 4px;
+    border: none;
+    padding: 10px 12px;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: normal;
     word-wrap: break-word;
 }
 
 .stats-table thead {
-    background-color: #333;
+    background: linear-gradient(90deg, #8a6d1e, #caa23a, #8a6d1e);
     color: #fff;
     font-weight: bold;
 }
 
-.stats-table tbody tr:nth-child(odd) {
+.stats-table th:nth-child(1), .stats-table td:nth-child(1) { text-align: center; width: 56px; }
+.stats-table th:nth-child(2), .stats-table td:nth-child(2) { text-align: left; }
+.stats-table th:nth-child(n+3), .stats-table td:nth-child(n+3) { text-align: right; }
+
+.stats-table tbody tr:nth-child(odd) td {
     background-color: #2c2c2c;
 }
 
-.stats-table tbody tr:nth-child(even) {
+.stats-table tbody tr:nth-child(even) td {
     background-color: #252525;
+    border-radius: 10px 10px 0 0;
+}
+
+.stats-table tbody tr td:not(:first-child) {
+    margin-left: 10px;
 }
 
 /* Highlight top 3 players */
-.stats-table tbody tr:nth-child(1) {
+.stats-table tbody tr:nth-child(1) td {
     background-color: rgba(255, 215, 0, 0.3); /* Gold for 1st place - very subtle */
     color: #fff; /* White text to match other rows */
     font-weight: bold;
 }
-
-.stats-table tbody tr:nth-child(2) {
+.stats-table tbody tr:nth-child(2) td {
     background-color: rgba(192, 192, 192, 0.3); /* Silver for 2nd place - very subtle */
     color: #fff; /* White text to match other rows */
     font-weight: bold;
 }
-
-.stats-table tbody tr:nth-child(3) {
+.stats-table tbody tr:nth-child(3) td {
     background-color: rgba(205, 127, 50, 0.3); /* Bronze for 3rd place - very subtle */
     color: #fff; /* White text to match other rows */
     font-weight: bold;
 }
 
-.stats-table tbody tr:hover {
+.stats-table tbody tr:hover td {
     background-color: #3a3a3a;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
+}
+
+.stats-table tbody tr td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.stats-table tbody tr td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 /* Mobile Responsiveness */
