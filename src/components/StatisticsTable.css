@@ -5,6 +5,9 @@
     position: relative;
     width: 100%;
     max-width: 100%;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .table-title {
@@ -17,11 +20,11 @@
     width: 100%;
     min-width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px;
+    border-spacing: 0;
     background-color: transparent;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     table-layout: auto;
+    position: relative;
 }
 
 .stats-table th, .stats-table td {
@@ -111,46 +114,100 @@
 @media (max-width: 768px) {
     .table-container {
         margin: 8px 4px;
-        padding-bottom: 10px;
+        padding: 8px 0;
+        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .table-title {
-        font-size: 1.5em;
-        margin-bottom: 12px;
+        font-size: 1.4em;
+        margin: 0 8px 12px;
         text-align: center;
+        position: sticky;
+        left: 0;
+        padding: 0 8px;
     }
 
     .stats-table {
-        font-size: 0.8em;
+        font-size: 0.85em;
         min-width: 100%;
+        border-spacing: 0;
     }
     
     .stats-table th, 
     .stats-table td {
-        padding: 8px 6px;
+        padding: 12px 8px;
         white-space: nowrap;
+        position: relative;
+        border-bottom: 1px solid #333;
     }
     
     .table-controls {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
+        margin: 0 8px 12px;
         flex-wrap: wrap;
+        gap: 8px;
+        position: sticky;
+        left: 0;
+        background: #1e1e1e;
+        padding: 8px 0;
+        z-index: 5;
     }
     
     .table-controls select {
         font-size: 0.9em;
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 1px solid #444;
+        background: #2c2c2c;
+        color: #fff;
     }
 
-    .stats-table th, .stats-table td {
-        padding: 8px 4px;
-        min-height: 44px; /* iOS touch target */
-    }
-
+    /* Sticky header */
     .stats-table thead {
         position: sticky;
         top: 0;
         z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sticky first column */
+    .stats-table th:first-child,
+    .stats-table td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 5;
+        background: inherit;
+        box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.2);
+        min-width: 50px;
+        text-align: center;
+    }
+
+    /* Sticky second column */
+    .stats-table th:nth-child(2),
+    .stats-table td:nth-child(2) {
+        position: sticky;
+        left: 50px; /* Width of first column */
+        z-index: 5;
+        background: inherit;
+        box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.2);
+        min-width: 120px;
+        max-width: 150px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    /* Remove sticky behavior on desktop */
+    @media (min-width: 769px) {
+        .stats-table th:first-child,
+        .stats-table td:first-child,
+        .stats-table th:nth-child(2),
+        .stats-table td:nth-child(2) {
+            position: static;
+            box-shadow: none;
+        }
     }
 
     /* Show all columns on tablets */
@@ -159,21 +216,35 @@
 
 @media (max-width: 480px) {
     .table-container {
-        margin: 5px;
+        margin: 4px;
+        padding: 4px 0;
     }
 
     .table-title {
-        font-size: 1.5em;
-        margin-bottom: 10px;
+        font-size: 1.3em;
+        margin: 0 4px 8px;
+        padding: 0 4px;
     }
 
     .stats-table {
-        font-size: 0.8em;
-        min-width: 600px;
+        font-size: 0.75em;
+        min-width: 100%;
     }
 
-    .stats-table th, .stats-table td {
-        padding: 6px 3px;
+    .stats-table th, 
+    .stats-table td {
+        padding: 10px 6px;
+        min-height: 40px;
+    }
+    
+    .table-controls {
+        margin: 0 4px 8px;
+        padding: 6px 0;
+    }
+    
+    .table-controls select {
+        font-size: 0.85em;
+        padding: 5px 8px;
     }
 
     /* Show all columns on small screens */
