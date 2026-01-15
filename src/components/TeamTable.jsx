@@ -10,15 +10,12 @@ const getLocalImagePath = (filename) => {
     return `/images/${filename}`;
   }
   
-  // Otherwise, try common extensions
-  const extensions = ['jpg', 'jpeg', 'png', 'webp'];
-  for (const ext of extensions) {
-    const testPath = `/images/${filename}.${ext}`;
-    // We'll check if the image exists by trying to load it
-    // For now, default to jpg
-    break;
+  // Check for .jpeg version first, then .jpg
+  if (filename === 'Hensch') {
+    return '/images/Hensch.jpeg';
   }
   
+  // Default to .jpg for other cases
   return `/images/${filename}.jpg`;
 };
 
