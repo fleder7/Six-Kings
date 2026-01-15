@@ -10,9 +10,9 @@ const getLocalImagePath = (filename) => {
     return `/images/${filename}`;
   }
   
-  // Check for .jpeg version first, then .jpg
+  // For Hensch, use .jpg extension
   if (filename === 'Hensch') {
-    return '/images/Hensch.jpeg';
+    return '/images/Hensch.jpg';
   }
   
   // Default to .jpg for other cases
